@@ -76,6 +76,7 @@ Note:
     bash ./setup_mavocap_gazebo.sh <number of robots> <communication success rate> <experiment title>
 
 运行以上命令后，命令行上有提示仿真进行到哪一步。由于是用screen在后台运行，都运行完成后主终端看起来什么都没发生。这时候运行
+
     # 查看所有session
     screen -ls
     # 进入某一session查看运行状态
@@ -85,4 +86,13 @@ Note:
 
 # Acknowledgement
 
-非常感谢
+非常感谢 robot-perception-group 的AIRCAP项目提供的代码，此仓库中的代码为源代码基于ubuntu18和gazebo9环境的移植。
+
+# Annex
+
+源代码git链接
+* catkin_ws其他必要包和构建包的详细流程：https://github.com/robot-perception-group/AIRCAP
+* rotors_simulator源代码（for gazebo 8）：https://github.com/robot-perception-group/rotors_simulator
+
+其他
+* 编译好的catkin_ws、caffe和rotors_simulator清华云盘链接：https://cloud.tsinghua.edu.cn/d/8505c576b2ab430aadd9/

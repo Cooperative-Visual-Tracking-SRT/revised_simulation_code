@@ -1,17 +1,17 @@
-更改后的仿真代码，包括更改后的caffe和rotors_simulator。
+更改后的仿真代码，包括更改后的caffe和rotors_simulator
 
 ## Preparation
 
-将这两个包以及 https://github.com/robot-perception-group/AIRCAP 描述所需的所有的包均放到~/catkin_ws/src下。
+将这两个包以及 https://github.com/robot-perception-group/AIRCAP 描述所需的所有的包均放到~/catkin_ws/src下
 
 ## caffe
 
-由于环境不同，caffe需要重新编译。
+由于环境不同，caffe需要重新编译
 
 Note:
 
 * 之前编译环境为gcc7.4，python2.7，cuda10.1和cudnn7.6.5
-* 需要ubuntu18下ros-melodic-desktop-full及其所有依赖包
+* 需要ubuntu18下ros-melodic-desktop-full及其所有依赖包，建议所有包都通过apt安装
 
 重新编译方法（时间比较长）：
 
@@ -19,7 +19,8 @@ Note:
     make clean
     make all -j8
     make pycaffe
-    (optional) make test -j8
+    make test -j8
+    (optional) make runtest -j8
     
 编译完成后将caffe/python加入PYTHONPATH环境变量：
     
@@ -31,27 +32,29 @@ Note:
     cd ~/catkin_ws/caffe
     python2 examples/ssd/ssd_pascal_webcam.py
 
-如果笔记本电脑有摄像头的话会打开摄像头，对摄像头获取的图像进行检测。
+如果笔记本电脑有摄像头的话会打开摄像头，对摄像头获取的图像进行检测
 
 ## rotors_simulator
 
-只需要放到~/catkin_ws/src下即可。
+只需要放到~/catkin_ws/src下即可
 
 ## catkin_make
 
 Note:
 
-* 在所有ros包克隆到catkin_ws后，安装必要依赖包。
+* 在所有ros包克隆到catkin_ws后，安装必要依赖包
 
   运行
   
       rosdep install --from-paths ~/catkin_ws/src --ignore-src
 
-* catkin_make检查没有安装的软件包。
+* catkin_make检查没有安装的软件包，名字比较奇怪的大多是ros包，解决方法如下
 
   例如提示找不到pose-cov-ops，运行
 
       sudo apt-get install ros-melodic-pose-cov-ops
+  
+  若其他如boost等包报错，如“未定义的引用”等，请确保所有包都是通过apt安装的；如果google不能解决，那么最快的解决方法是重装系统
       
 * 有些包会和anaconda里面的包起冲突，例如boost，并没有很好的解决方案。我的解决方法是把anaconda卸了（
 
@@ -81,6 +84,10 @@ Note:
     screen -ls
     # 进入某一session查看运行状态
     screen -r session_number.session_name
+    
+    # 如果想要关掉所有session重新开始，运行以下命令
+    # <number of sessions>换成session个数，也可以直接指定一个大整数如20
+    screen -ls|awk 'NR>=1&&NR<= <number of sessions> {print $1}'|awk '{print "screen -S "$1" -X quit"}'|sh
 
 进入每一个session看看到底是哪个没有运行成功，再进一步debug。一种等价的方法是，打开脚本setup_mavocap_gazebo.sh逐句运行找bug。
 

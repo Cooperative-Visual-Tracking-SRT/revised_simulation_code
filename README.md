@@ -12,7 +12,7 @@
 
 Note:
 
-* 之前编译环境为gcc7.4，python2.7，cuda10.1和cudnn7.6.5
+* 之前编译环境为gcc7.4，python2.7，cuda10.1和cudnn7.6.5，显卡为Nvidia 1060M
 * 需要ubuntu18下ros-melodic-desktop-full及其所有依赖包，建议所有包都通过apt安装
 
 重新编译方法（时间比较长）：
@@ -62,7 +62,7 @@ Note:
 
 * 注意在整个过程中需要首先保证ros melodic环境已经初始化
 
-      source /etc/opt/ros/melodic/setup.bash
+      source /opt/ros/melodic/setup.bash
 
 利用catkin编译所有包。运行
 

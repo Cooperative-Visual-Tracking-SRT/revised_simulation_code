@@ -1,4 +1,6 @@
-更改后的仿真代码，包括更改后的caffe和rotors_simulator
+# Description
+
+此仓库为 robot-perception-group 的AIRCAP项目仿真代码基于ubuntu18和gazebo9更改后的版本，包括更改后的caffe和rotors_simulator
 
 ## Preparation
 

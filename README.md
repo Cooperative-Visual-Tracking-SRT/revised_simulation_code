@@ -60,6 +60,10 @@ Note:
       
 * 有些包会和anaconda里面的包起冲突，例如boost，并没有很好的解决方案。我的解决方法是把anaconda卸了（
 
+* 注意在整个过程中需要首先保证ros melodic环境已经初始化
+
+      source /etc/opt/ros/melodic/setup.bash
+
 利用catkin编译所有包。运行
 
     cd ~/catkin_ws
@@ -74,6 +78,10 @@ Note:
     sudo apt-get install screen
 
 如果没有用过screen，请参考教程 https://www.cnblogs.com/mchina/archive/2013/01/30/2880680.html
+
+确认有没有把编译好的包初始化，运行
+
+    source ~/catkin_ws/devel/setup.bash
 
 最简单的运行仿真方式为
 

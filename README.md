@@ -17,7 +17,7 @@ Note:
 
 重新编译方法（时间比较长）：
 
-    cd ~/catkin_ws/caffe
+    cd ~/catkin_ws/src/caffe
     make clean
     make all -j8
     make pycaffe
@@ -26,12 +26,12 @@ Note:
     
 编译完成后将caffe/python加入PYTHONPATH环境变量：
     
-    export PYTHONPATH=$PYTHONPATH:~/catkin_ws/caffe/python
+    export PYTHONPATH=$PYTHONPATH:~/catkin_ws/src/caffe/python
     source ~/.bashrc
 
 运行测试：
     
-    cd ~/catkin_ws/caffe
+    cd ~/catkin_ws/src/caffe
     python2 examples/ssd/ssd_pascal_webcam.py
 
 如果笔记本电脑有摄像头的话会打开摄像头，对摄像头获取的图像进行检测

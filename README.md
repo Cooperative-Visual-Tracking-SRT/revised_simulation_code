@@ -113,3 +113,6 @@ Note:
 
 其他
 * 编译好的catkin_ws、caffe和rotors_simulator清华云盘链接：https://cloud.tsinghua.edu.cn/d/8505c576b2ab430aadd9/
+* 渣像素仿真运行成果效果（6架无人机）
+
+![](https://github.com/Cooperative-Visual-Tracking-SRT/revised_simulation_code/blob/master/result.jpg)

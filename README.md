@@ -127,6 +127,7 @@ Note:
 转化为bag文件后可以利用仓库simulation_exp文件夹中的作图代码mav2_figure.py画出目标坐标ground_truth和无人机对目标的detection随时间变化的情况，并计算误差的均值和标准差。（由于没怎么用过rosbag和matplotlib，作图代码写的非常丑陋qaq）
 
 最后，在simulation_exp/figures文件夹中存储了2架无人机、不同loss下的单次实验（没有取平均）结果，可以大概展现实验的估计精度并体现communication loss的影响。
+![](https://github.com/Cooperative-Visual-Tracking-SRT/revised_simulation_code/blob/master/simulation_exp/figures/random_exp/mav2_60loss_random.png)
 
 # Acknowledgement
 

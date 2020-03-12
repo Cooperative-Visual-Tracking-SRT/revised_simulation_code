@@ -3,7 +3,7 @@ import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
 
-bag = rosbag.Bag("./mav2_99loss_random.bag")
+bag = rosbag.Bag("./mav2_noloss_random3.bag")
 
 N = bag.get_message_count()
 start_t = bag.get_start_time()
@@ -50,10 +50,10 @@ for topic, msg, t in bag.read_messages(topics=['/machine_2/target_tracker/pose']
     step += 1
 print("done")
 
-mu_x = np.mean(error_x)
-mu_y = np.mean(error_y)
-sigma_x = np.std(error_x)
-sigma_y = np.std(error_x)
+mu_x = np.mean(error_x[np.nonzero(times)])
+mu_y = np.mean(error_y[np.nonzero(times)])
+sigma_x = np.std(error_x[np.nonzero(times)])
+sigma_y = np.std(error_x[np.nonzero(times)])
 plt.rcParams['figure.figsize'] = (12.0, 6.0)
 plt.figure()
 plt.subplot(2,1,1)
@@ -67,7 +67,7 @@ plt.xticks([10*i for i in range(5,18)])
 plt.grid()
 plt.xlabel("simulation time/s")
 plt.ylabel("pose estimation & error x/m")
-plt.title("2 drones, 99 communication loss, mean error ({:.2f},{:.2f}), standard error ({:.2f},{:.2f})".format(mu_x,mu_y,sigma_x,sigma_y))
+plt.title("2 drones, 0 communication loss, mean error ({:.2f},{:.2f}), standard error ({:.2f},{:.2f})".format(mu_x,mu_y,sigma_x,sigma_y))
 
 plt.subplot(2,1,2)
 plt.plot(times[np.nonzero(times)],mav1_y[np.nonzero(times)],label="mav1")

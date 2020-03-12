@@ -1,0 +1,76 @@
+<?xml version="1.0" ?>
+<sdf version="1.4">
+   
+ <world name="default">
+      <actor name="actor">
+      <pose>0 0 0 0 0 0</pose>
+      <skin>
+        <filename>walk.dae</filename>
+      </skin>
+      <animation name="walking">
+        <filename>walk.dae</filename>
+        <interpolate_x>true</interpolate_x>
+      </animation>
+      <script>
+        <trajectory id="0" type="walking">
+          <!--修改以下内容可以即可改变actor运行轨迹-->
+          <waypoint>
+            <time>0.00</time>
+            <pose>0.00 0.00 0 0 0 0</pose>
+          </waypoint>
+          <waypoint>
+            <time>10.25</time>
+            <pose>6.65 -1.56 0 0 0 0</pose>
+          </waypoint>
+          <waypoint>
+            <time>19.06</time>
+            <pose>5.13 3.98 0 0 0 0</pose>
+          </waypoint>
+          <waypoint>
+            <time>41.00</time>
+            <pose>-3.32 -5.12 0 0 0 0</pose>
+          </waypoint>
+          <waypoint>
+            <time>49.91</time>
+            <pose>0.14 -8.79 0 0 0 0</pose>
+          </waypoint>
+          <waypoint>
+            <time>68.69</time>
+            <pose>-0.40 5.70 0 0 0 0</pose>
+          </waypoint>
+          <waypoint>
+            <time>70.67</time>
+            <pose>0.93 5.96 0 0 0 0</pose>
+          </waypoint>
+          <waypoint>
+            <time>85.24</time>
+            <pose>9.92 8.63 0 0 0 0</pose>
+          </waypoint>
+          <waypoint>
+            <time>92.82</time>
+            <pose>10.92 13.69 0 0 0 0</pose>
+          </waypoint>
+          <waypoint>
+            <time>101.03</time>
+            <pose>9.96 8.08 0 0 0 0</pose>
+          </waypoint>
+          <waypoint>
+            <time>104.83</time>
+            <pose>10.09 5.16 0 0 0 0</pose>
+          </waypoint>
+          <waypoint>
+            <time>123.88</time>
+            <pose>0.00 0.00 0 0 0 0</pose>
+          </waypoint>
+          <!--修改以上内容可以即可改变actor运行轨迹-->
+        </trajectory>
+      </script>-->
+      <plugin name="actor1_plugin" filename="libactor_custom.so">
+        <target>0 -5 1.2138</target>
+        <target_weight>1.15</target_weight>
+        <obstacle_weight>1.8</obstacle_weight>
+        <animation_factor>5.1</animation_factor>
+      </plugin>
+    </actor>       
+  </world>
+</sdf> 

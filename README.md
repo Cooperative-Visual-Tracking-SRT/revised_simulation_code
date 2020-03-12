@@ -101,11 +101,38 @@ Note:
 
 进入每一个session看看到底是哪个没有运行成功，再进一步debug。一种等价的方法是，打开脚本setup_mavocap_gazebo.sh逐句运行找bug。
 
+## simulation experiment
+
+在IROS-2018论文中，原作者Price等人利用gazebo跑了三个仿真实验，若需要复现，或是需要利用仿真测试移植后的系统性能可以按照以下说明进行。
+
+首先按照 https://github.com/robot-perception-group/AIRCAP 中复现论文仿真实验的说明修改setup_mavocap_gazebo.sh。因为需要实验数据记录，需要创建一个记录文件夹（例如/home/user/log）并写在以上sh文件的LOGPATH变量中，然后将文件接近末尾关于rosbag数据记录的代码取消注释，也就是
+
+    #start logs
+    echo "Starting recording..."
+    echo screen -d -m -S ROSBAG bash -i -c "rosbag record -o ${LOGPATH}/${NAME}.bag $( cat bagtopics.txt | tr '\n' ' ' )"
+    screen -d -m -S ROSBAG bash -i -c "rosbag record -o ${LOGPATH}/${NAME}.bag $( cat bagtopics.txt | tr '\n' ' ' )"
+
+    echo "Running experiment for 120 seconds"
+    ./rossleep.py 120
+    
+以上代码会自动在LOGPATH中创建rosbag文件，记录bagtopics.txt中写到的所有topic。打开bagtopics.txt文件，在最后加入一行/gazebo/model_states，这样可以不用原作者的target_publish节点获得被跟踪目标的ground_truth位置坐标。
+
+仿真环境中actor默认在两点一线之间移动。原作者似乎写了一些其他方式移动的代码，但是用起来有bug；其实可以用一种非常土的方法实现actor路径的规划：仿真利用target_RAL.sdf这个文件生成actor，只需要修改actor中的描述，设定一些时间节点和waypoint，就能够实现actor按照路径规划的移动。可以利用simulation_exp文件夹中的random_traj.py文件生成随机waypoint的xml代码，之后将其复制粘贴到target_RAL.sdf中（详见simulation_exp文件夹中的target_RAL.sdf）。由于仿真时间是有限的，只要waypoint足够多时间足够长，就可以认为actor的移动处于伪随机的状态。
+
+仿真计时120s，仿真结束后kill掉screen的所有session即可。此时LOGPATH中会生成*.bag.active的文件，运行以下命令使其转化为bag文件：
+
+    rosbag reindex *.bag.active
+    rosbag fix *.bag.active <name you want>.bag
+
+转化为bag文件后可以利用仓库simulation_exp文件夹中的作图代码mav2_figure.py画出目标坐标ground_truth和无人机对目标的detection随时间变化的情况，并计算误差的均值和标准差。（由于没怎么用过rosbag和matplotlib，作图代码写的非常丑陋qaq）
+
+最后，在simulation_exp/figures文件夹中存储了2架无人机、不同loss下的单次实验（没有取平均）结果，可以大概展现实验的估计精度并体现communication loss的影响。
+
 # Acknowledgement
 
 非常感谢 robot-perception-group 的AIRCAP项目提供的代码，此仓库中的代码为源代码基于ubuntu18和gazebo9环境的移植。
 
-# Annex
+# Annex 
 
 源代码git链接
 * catkin_ws其他必要包和构建包的详细流程：https://github.com/robot-perception-group/AIRCAP
